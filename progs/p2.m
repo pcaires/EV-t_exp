@@ -5,7 +5,6 @@ clc
 
 D = dlmread('EV_2021.04B', ';', 1,0);
 t = D(:,1);                                             % Time (s)
-L = length(t);
 
 g = 9.80665;
 
