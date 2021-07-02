@@ -9,18 +9,24 @@ L = length(t);
 
 g = 9.80665;
 
-label = {'grad1','grad2','grad2','grad2','grad2','grad2','grad2','grad2','grad2'};
+label = {'EAS (kts)','QNE (ft)','Accel. Z (m/s^2)','N2 (%)',...
+         'Fuel Flow (lb/h)','Exhaust Gas Temperature (K)',...
+         'N2 (%)','Fuel Flow (lb/h)','Exhaust Gas Temperature (K)'};
+         
+fn = {'EAS','QNE','a_z','N2_rh','FF_rh','EGT_rh','N2_lt','FF_lt','EGT_lt'};
 
 
-##
-##for i = [2:10]
-##  y =  D(:,i);
-##  figure()
-##  plot(t,y)
-##  xlabel('Tempo (s)')
-##  ylabel(label{i-1})
-##  grid
-##end
+
+for i = [2:10]
+  y =  D(:,i);
+  hf = figure()
+  plot(t,y,'linewidth',2)
+  xlabel('Tempo (s)')
+  ylabel(label{i-1})
+  grid
+  print(hf,['resultados/p2/' fn{i-1} '.svg'])
+  close
+end
 
 
 a_g = D(:,4)/g;
@@ -34,7 +40,7 @@ a_g = D(:,4)/g;
 plot(t,a_g,'linewidth',2,...
      t(idx1),px1,'o','MarkerSize',10)
 
-fid = fopen("extremos_az.txt","wt");
+fid = fopen("resultados/p2/extremos_az.txt","wt");
 fprintf(fid,"t; a_z \n");
 for i = 1:length(idx1)
   fprintf(fid,"%f; %f \n",t(idx1(i)),px1(i));
