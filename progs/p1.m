@@ -26,6 +26,11 @@ for i = [2:5]
   clear idx
   [px idx] = findpeaks(abs(FTa(Iv))*2,"MinPeakHeight",0.2);                   % Find peaks
   
+  if i == 4 || i == 3
+    ln = length(idx)
+    px(ln+1) = abs(FTa(Iv))(1)*2
+    idx(ln+1) = 1
+  end
   
   hf = figure();
   
