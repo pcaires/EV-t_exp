@@ -39,11 +39,16 @@ for i = [2:5]
   
   clear lb
   for j = 1:length(idx)
-    lb{j} = ['f= ' num2str(Fv(idx(j))) 'Hz; A= ' num2str(px(j))]
+    lb{j} = ['f= ' num2str(Fv(idx(j))) 'Hz; A= ' num2str(px(j))];
   end
   
-  text(Fv(idx)+0.7,px,lb)
-  
+  if i != 5
+    text(Fv(idx)+0.7,px,lb)
+  else
+    x = [(Fv(idx(1:3))+0.7) Fv(idx(4))-8]
+    y = [px(1:3)' px(4)+0.25]
+    a = text(x,y,lb);
+  end
   xlabel('Frequência (Hz)')
   xlim([0 25])
   ylabel('Amplitude')
