@@ -8,7 +8,7 @@ t = D(:,1);                                             % Time (s)
 
 g = 9.80665;
 
-yname = {'EAS (kts)','QNE (ft)','Accel. Z (m/s^2)','N2 (%)',...
+yname = {'EAS (kts)','QNE (ft)','Accel. Z (m/s^2)','N2 (\%)',...
          'Fuel Flow (lb/h)','Exhaust Gas Temperature (K)'};
          
 fn = {'EAS','QNE','a_z','N2','FF','EGT'};
@@ -18,7 +18,7 @@ comp = {'rh','lt','comp'};
 
 for i = [2:4]
   y =  D(:,i);
-  hf = figure()
+  hf = figure();
   plot(t,y,'linewidth',2)
   xlabel('Tempo (s)')
   ylabel(yname{i-1})
@@ -29,9 +29,9 @@ end
 
 for i = [5:7]
   clear y
-  y =  [D(:,i) D(:,i+3)]
+  y =  [D(:,i) D(:,i+3)];
   for j = [1:3]
-    hf = figure()
+    hf = figure(),
     if j != 3
       plot(t,y(:,j),'linewidth',2)
     else
@@ -47,6 +47,23 @@ for i = [5:7]
     close
   end
 end
+
+FF_tot = D(:,5) + D(:,8); #Total Fuel Flow (right + left)(lb/h)
+FF_tot = FF_tot *1/3600;  #Total Fuel Flow (lb/s)
+F_tot = [];
+
+for i = 1:length(t)
+  F_tot(i) = trapz(t(1:i),FF_tot(1:i)); #Total Fuel Consumption (lb)
+end
+
+hf = figure();
+plot(t,F_tot,'linewidth',2)
+xlabel('Tempo (s)')
+ylabel('Consumo Combustível (lb)')
+grid
+print(hf,['resultados/p2/consumo.svg'])
+close
+
 
 a_g = D(:,4)/g;
 ##plot(t,a_g)
@@ -65,6 +82,7 @@ for i = 1:length(idx1)
   fprintf(fid,"%f; %f \n",t(idx1(i)),px1(i));
 ##  print("%f; %f \n",t(idx1(i)),px1(i))
 end
+
 fclose(fid)
 
 
