@@ -8,25 +8,36 @@ t = D(:,1);                                             % Time (s)
 
 g = 9.80665;
 
-label = {'EAS (kts)','QNE (ft)','Accel. Z (m/s^2)','N2 (%)',...
-         'Fuel Flow (lb/h)','Exhaust Gas Temperature (K)',...
-         'N2 (%)','Fuel Flow (lb/h)','Exhaust Gas Temperature (K)'};
+yname = {'EAS (kts)','QNE (ft)','Accel. Z (m/s^2)','N2 (%)',...
+         'Fuel Flow (lb/h)','Exhaust Gas Temperature (K)'}
          
-fn = {'EAS','QNE','a_z','N2_rh','FF_rh','EGT_rh','N2_lt','FF_lt','EGT_lt'};
+fn = {'EAS','QNE','a_z','N2','FF','EGT'}
 
 
 
-for i = [2:10]
+for i = [2:4]
   y =  D(:,i);
   hf = figure()
   plot(t,y,'linewidth',2)
   xlabel('Tempo (s)')
-  ylabel(label{i-1})
+  ylabel(yname{i-1})
   grid
   print(hf,['resultados/p2/' fn{i-1} '.svg'])
   close
 end
-
+for i = [5:7]
+  y1 =  D(:,i);
+  y2 =  D(:,i+3);
+  hf = figure()
+  plot(t,y1,'linewidth',2,...
+       t,y2,'linewidth',2)
+  xlabel('Tempo (s)')
+  ylabel(yname{i-1})
+  legend('Direita','Esquerda')
+  grid
+  print(hf,['resultados/p2/' fn{i-1} '.svg'])
+  close
+end
 
 a_g = D(:,4)/g;
 ##plot(t,a_g)
