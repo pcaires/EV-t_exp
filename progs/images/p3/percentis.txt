@@ -1,2 +1,3 @@
 Percentis 95 para confirmação limites ICAO
 
+VPE: 1.239323; HPE (elips): 1.531997; HPE (aero): 1.068412 
