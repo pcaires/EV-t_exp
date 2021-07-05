@@ -67,23 +67,13 @@ grid
 print(hf,[spath 'consumo' type])
 close
 
-
 a_g = D(:,4)/g;
-##plot(t,a_g)
-##a_g_filter = sgolayfilt(a_g,3,7)
-
 [px1 idx1] = findpeaks(a_g,'DoubleSided');
-##[val idx2] = findpeaks(-a_g)
-
-
-#plot(t,a_g,'linewidth',2,...
-#     t(idx1),px1,'o','MarkerSize',10)
 
 fid = fopen([spath 'extremos_az.txt'],'wt');
 fprintf(fid,"t; a_z \n");
 for i = 1:length(idx1)
   fprintf(fid,"%f; %f \n",t(idx1(i)),px1(i));
-##  print("%f; %f \n",t(idx1(i)),px1(i))
 end
 
 fclose(fid);
