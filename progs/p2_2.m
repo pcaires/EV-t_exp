@@ -3,7 +3,7 @@ clear all
 clc
 
 
-D = dlmread('resultados/p2/extremos_az.txt', ';', 1,0);
+D = dlmread('images/p2/extremos_az.txt', ';', 1,0);
 t = D(:,1);
 a_z = D(:,2);
 clear D
@@ -30,7 +30,7 @@ for j = 1:length(N(1,:))
 end
 
 
-fid = fopen("resultados/p2/ciclos_az.txt","wt");
+fid = fopen("images/p2/ciclos_az.txt","wt");
 fprintf(fid,"Numero de ciclos para pares de N1 e N2\n\n");
 for i = 1:length(c)
   fprintf(fid,"N1:%2.1f; N2:%2.1f; ciclos:%d\n",N(1,i),N(2,i),c(i));

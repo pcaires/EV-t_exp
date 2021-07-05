@@ -40,7 +40,7 @@ pVPE95 = prctile(VPE,95);
 pHPE95_1 = prctile(HPE1,95);
 pHPE95_2 = prctile(HPE2,95);
 
-fid = fopen("resultados/p3/percentis.txt","wt");
+fid = fopen("images/p3/percentis.txt","wt");
 fprintf(fid,"Percentis 95 para confirmação limites ICAO\n\n");
 fprintf(fid,"VPE 95%: %f; HPE (elips) 95%:%f; HPE (aero) 95%:%f \n",pVPE95,pHPE95_1,pHPE95_2);
 fclose(fid)

@@ -1,6 +1,8 @@
 pkg load signal
 clear all
 
+spath = 'images/p1/'              %Save path 
+type = '.tex'                     %File type 
 D = dlmread('EV_2021.04A', ';', 1,0);
 t = D(:,1);                                             % Time (s)
 L = length(t);
@@ -13,9 +15,9 @@ for i = [2:5]
   hf = figure();
   plot(t,a,'linewidth',2)
   xlabel('Tempo (s)')
-  ylabel('Accel (m/s^2)')
+  ylabel('Accel ($m/s^2$)')
   grid
-  print(hf,['resultados/p1/grafico_a' num2str(i-1) '.svg'])
+  print(hf,[spath 'grafico_a' num2str(i-1) type])
   close
   
   FTa = fft(a)/L;                                         % Fourier Transform (Scaled)
@@ -45,7 +47,7 @@ for i = [2:5]
   if i != 5
     text(Fv(idx)+0.7,px,lb)
   else
-    x = [(Fv(idx(1:3))+0.7) Fv(idx(4))-8]
+    x = [(Fv(idx(1:3))+0.7) Fv(idx(4))-4]
     y = [px(1:3)' px(4)+0.25]
     a = text(x,y,lb);
   end
@@ -53,6 +55,6 @@ for i = [2:5]
   xlim([0 25])
   ylabel('Amplitude')
   grid
-  print(hf,['resultados/p1/fourier_a' num2str(i-1) '.svg'])
+  print(hf,[spath 'fourier_a' num2str(i-1) type])
   close
 end

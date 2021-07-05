@@ -2,13 +2,16 @@ pkg load signal
 clear all
 clc
 
+spath = 'images/p2/'              %Save path 
+type = '.tex'                     %File type 
+
 
 D = dlmread('EV_2021.04B', ';', 1,0);
 t = D(:,1);                                             % Time (s)
 
 g = 9.80665;
 
-yname = {'EAS (kts)','QNE (ft)','Accel. Z (m/s^2)','N2 (\%)',...
+yname = {'EAS (kts)','QNE (ft)','Accel. Z ($m/s^2$)','N2 (\%)',...
          'Fuel Flow (lb/h)','Exhaust Gas Temperature (K)'};
          
 fn = {'EAS','QNE','a_z','N2','FF','EGT'};
@@ -23,7 +26,7 @@ for i = [2:4]
   xlabel('Tempo (s)')
   ylabel(yname{i-1})
   grid
-  print(hf,['resultados/p2/' fn{i-1} '.svg'])
+  print(hf,[spath fn{i-1} type])
   close
 end
 
@@ -43,7 +46,7 @@ for i = [5:7]
       legend('Direita','Esquerda')
     end
     grid
-    print(hf,['resultados/p2/' fn{i-1} '_' comp{j} '.svg'])
+    print(hf,[spath fn{i-1} '_' comp{j} type])
     close
   end
 end
@@ -61,7 +64,7 @@ plot(t,F_tot,'linewidth',2)
 xlabel('Tempo (s)')
 ylabel('Consumo Combustível (lb)')
 grid
-print(hf,['resultados/p2/consumo.svg'])
+print(hf,[spath 'consumo' type])
 close
 
 
@@ -76,7 +79,7 @@ a_g = D(:,4)/g;
 #plot(t,a_g,'linewidth',2,...
 #     t(idx1),px1,'o','MarkerSize',10)
 
-fid = fopen("resultados/p2/extremos_az.txt","wt");
+fid = fopen([spath 'extremos_az.txt'],'wt');
 fprintf(fid,"t; a_z \n");
 for i = 1:length(idx1)
   fprintf(fid,"%f; %f \n",t(idx1(i)),px1(i));
