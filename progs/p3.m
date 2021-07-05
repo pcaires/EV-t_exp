@@ -59,6 +59,7 @@ close
 hf = figure();            %Numero de satelites
 plot(t_s,D(:,4),'linewidth',2)
 xlabel('Tempo (s)')
+ylim([6 10])
 ylabel('Numero de satélites usados')
 grid
 print(hf,[spath 'nsv_used' type])
