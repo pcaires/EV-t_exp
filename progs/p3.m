@@ -27,7 +27,7 @@ clc
 VPE = NS(:,3)-REF(:,3);
 
 for i = 1:length(t_s)
-  %erro posição em m
+  %erro posicao em m
   err_pos(i,:) = [NS(i,:)-REF(i,:) norm(NS(i,:)-REF(i,:))];
   
   %HPE superficie da elipsoide wgs84

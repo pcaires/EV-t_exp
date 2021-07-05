@@ -35,4 +35,4 @@ fprintf(fid,"Numero de ciclos para pares de N1 e N2\n\n");
 for i = 1:length(c)
   fprintf(fid,"N1:%2.1f; N2:%2.1f; ciclos:%d\n",N(1,i),N(2,i),c(i));
 end
-fclose(fid)
+fclose(fid);
