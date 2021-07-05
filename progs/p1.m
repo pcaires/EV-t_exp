@@ -51,7 +51,7 @@ for i = [2:5]
     y = [px(1:3)' px(4)+0.25]
     a = text(x,y,lb);
   end
-  xlabel('Frequência (Hz)')
+  xlabel('Freq. (Hz)')
   xlim([0 25])
   ylabel('Amplitude')
   grid

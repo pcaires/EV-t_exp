@@ -34,7 +34,7 @@ for i = [5:7]
   clear y
   y =  [D(:,i) D(:,i+3)];
   for j = [1:3]
-    hf = figure(),
+    hf = figure();
     if j != 3
       plot(t,y(:,j),'linewidth',2)
     else
@@ -62,7 +62,7 @@ end
 hf = figure();
 plot(t,F_tot,'linewidth',2)
 xlabel('Tempo (s)')
-ylabel('Consumo Combustível (lb)')
+ylabel('Fuel Consuption (lb)')
 grid
 print(hf,[spath 'consumo' type])
 close
@@ -86,7 +86,7 @@ for i = 1:length(idx1)
 ##  print("%f; %f \n",t(idx1(i)),px1(i))
 end
 
-fclose(fid)
+fclose(fid);
 
 
 

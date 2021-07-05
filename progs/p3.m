@@ -42,7 +42,7 @@ hf = figure();            %erro plano horizontal
 plot(t_s,err_pos(:,1),'linewidth',2,...
      t_s,err_pos(:,2),'linewidth',2)
 xlabel('Tempo (s)')
-ylabel('Erro posição (m)')
+ylabel('Erro (m)')
 legend('Norte','Este')
 grid
 print(hf,[spath 'err_hor' type])
@@ -51,7 +51,7 @@ close
 hf = figure();            %erro eixo vertical
 plot(t_s,err_pos(:,3),'linewidth',2)
 xlabel('Tempo (s)')
-ylabel('Erro posição vertical (m)')
+ylabel('Erro (m)')
 grid
 print(hf,[spath 'err_ver' type])
 close
@@ -60,7 +60,7 @@ hf = figure();            %Numero de satelites
 plot(t_s,D(:,4),'linewidth',2)
 xlabel('Tempo (s)')
 ylim([6 10])
-ylabel('Numero de satélites usados')
+ylabel('Sat. usados')
 grid
 print(hf,[spath 'nsv_used' type])
 close
@@ -70,8 +70,47 @@ pHPE95_1 = prctile(HPE1,95);
 pHPE95_2 = prctile(HPE2,95);
 
 fid = fopen([spath "percentis.txt"],"wt");
-fprintf(fid,"Percentis 95 para confirmação limites ICAO\n\n");
+fprintf(fid,"Percentis 95 para limites ICAO\n\n");
 
 fprintf(fid,"VPE: %f; HPE (elips): %f; HPE (aero): %f \n",pVPE95,pHPE95_1,pHPE95_2);
 
 fclose(fid);
+
+
+
+##
+##hf = figure();            %HPE 1
+##plot(t_s,HPE1,'linewidth',2,...
+##     [115500 119500],[pHPE95_1 pHPE95_1],'linewidth',2,...
+##     [115500 119500],[16 16],'linewidth',1)
+##xlabel('Tempo (s)')
+##ylabel('HPE (m)')
+##legend('HPE','HPE (95\%)','Lim. APV-I/II, CAT-I')
+##grid
+##print(hf,[spath 'HPE1' type])
+##close
+##
+##hf = figure();            %HPE 2
+##plot(t_s,HPE2,'linewidth',2,...
+##     [115500 119500],[pHPE95_2 pHPE95_2],'linewidth',1,...
+##     [115500 119500],[16 16],'linewidth',1)
+##xlabel('Tempo (s)')
+##ylabel('HPE (m)')
+##legend('HPE','HPE (95\%)','Lim. APV-I/II, CAT-I')
+##grid
+##print(hf,[spath 'HPE2' type])
+##close
+##
+##hf = figure();            %VPE
+##plot(t_s,HPE1,'linewidth',2,...
+##     [115500 119500],[pVPE95 pVPE95],'--','linewidth',2,...
+##     [115500 119500],[20 20],'linewidth',1,...
+##     [115500 119500],[8 8],'linewidth',1,...
+##     [115500 119500],[5 5],'linewidth',1)
+##xlabel('Tempo (s)')
+##ylabel('VPE (m)')
+##legend('VPE','VPE (95\%)','Lim. APV-I','Lim. APV-II', 'Lim. CAT-I')
+##grid
+##print(hf,[spath 'VPE' type])
+##close
+
