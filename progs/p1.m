@@ -4,11 +4,11 @@ clear all
 spath = 'images/p1/'              %Save path 
 type = '.tex'                     %File type 
 D = dlmread('EV_2021.04A', ';', 1,0);
-t = D(:,1);                                             % Time (s)
+t = D(:,1);                                        % Time (s)
 L = length(t);
-Ts = t(2)-t(1);                                         % Sampling Interval (sec)
-Fs = 1/Ts;                                              % Sampling Frequency (Hz)
-Fn = Fs/2;                                              % Nyquist Frequency (Hz)
+Ts = t(2)-t(1);                                    % Sampling Interval (sec)
+Fs = 1/Ts;                                         % Sampling Frequency (Hz)
+Fn = Fs/2;                                         % Nyquist Frequency (Hz)
 
 for i = [2:5]
   a =  D(:,i);
@@ -20,13 +20,13 @@ for i = [2:5]
   print(hf,[spath 'grafico_a' num2str(i-1) type])
   close
   
-  FTa = fft(a)/L;                                         % Fourier Transform (Scaled)
-  Fv = linspace(0, 1, fix(L/2)+1)*Fn;                     % Frequency Vector
-  Iv = 1:length(Fv);                                      % Index Vector
+  FTa = fft(a)/L;                                   % Fourier Transform (Scaled)
+  Fv = linspace(0, 1, fix(L/2)+1)*Fn;               % Frequency Vector
+  Iv = 1:length(Fv);                                % Index Vector
   
   clear px
   clear idx
-  [px idx] = findpeaks(abs(FTa(Iv))*2,"MinPeakHeight",0.2);                   % Find peaks
+  [px idx] = findpeaks(abs(FTa(Iv))*2,"MinPeakHeight",0.2); % Find peaks
   
   if i == 4 || i == 3
     ln = length(idx)
@@ -37,7 +37,7 @@ for i = [2:5]
   hf = figure();
   
   plot(Fv, abs(FTa(Iv))*2,'linewidth',2,...
-       Fv(idx),px,'o','linewidth',2,'MarkerSize',7)       % Single-Sided Amplitude Plot and peaks
+       Fv(idx),px,'o','linewidth',2,'MarkerSize',7); % Single-Sided Amplitude Plot and peaks
   
   clear lb
   for j = 1:length(idx)
