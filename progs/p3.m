@@ -57,10 +57,12 @@ print(hf,[spath 'err_ver' type])
 close
 
 hf = figure();            %Numero de satelites
-plot(t_s,D(:,4),'linewidth',2)
+plot(t_s,D(:,3),'linewidth',2,...
+     t_s,D(:,4),'linewidth',2)
 xlabel('Tempo (s)')
-ylim([6 10])
+ylim([6 13])
 ylabel('Sat. usados')
+legend('NSV_LOCK','NSV_USED')
 grid
 print(hf,[spath 'nsv_used' type])
 close
