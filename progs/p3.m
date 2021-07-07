@@ -71,7 +71,7 @@ plot(t_s,D(:,3),'linewidth',2,...
 xlabel('Tempo (s)')
 ylim([6 13])
 ylabel('Sat. usados')
-legend('NSV_LOCK','NSV_USED')
+legend('NSV\_LOCK','NSV\_USED')
 grid
 print(hf,[spath 'nsv_used' type])
 close
@@ -133,8 +133,9 @@ plot(t_s,HPL,'linewidth',2,...
      [115500 119500],[pHPL99 pHPL99],'--','linewidth',1,...
      [115500 119500],[40 40],'linewidth',1)
 xlabel('Tempo (s)')
-ylabel('HPE (m)')
-legend('HPL','HPE (99\%)','Lim. HAL APV-I/II, CAT-I')
+ylabel('HPL (m)')
+legend('HPL','HPL (99\%)','Lim. HAL APV-I/II, CAT-I')
+ylim([5 42])
 grid
 print(hf,[spath 'HPL' type])
 close
@@ -146,8 +147,9 @@ plot(t_s,VPL,'linewidth',2,...
      [115500 119500],[20 20],'linewidth',1,...
      [115500 119500],[12 12],'linewidth',1)
 xlabel('Tempo (s)')
-ylabel('VPE (m)')
+ylabel('VPL (m)')
 legend('VPL','VPL (99\%)','Lim. VAL APV-I','Lim. VAL APV-II', 'Lim. VAL CAT-I')
+ylim([5 52])
 grid
 print(hf,[spath 'VPL' type])
 close
