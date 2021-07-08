@@ -33,7 +33,7 @@ end
 for i = [5:7]
   clear y
   y =  [D(:,i) D(:,i+3)];
-  for j = [1:3]
+  for j =  3 %[1:3]
     hf = figure();
     if j != 3
       plot(t,y(:,j),'linewidth',2)
@@ -51,7 +51,7 @@ for i = [5:7]
   end
 end
 
-FF_tot = D(:,5) + D(:,8); #Total Fuel Flow (right + left)(lb/h)
+FF_tot = D(:,6) + D(:,9); #Total Fuel Flow (right + left)(lb/h)
 FF_tot = FF_tot *1/3600;  #Total Fuel Flow (lb/s)
 F_tot = [];
 
@@ -70,7 +70,16 @@ close
 a_g = D(:,4)/g;
 [px1 idx1] = findpeaks(a_g,'DoubleSided');
 
+hf = figure();
+plot(t,a_g,'linewidth',2)
+xlabel('Tempo (s)')
+ylabel('Accel. $a_z$ (g)')
+grid
+print(hf,[spath 'a_z_g' ftype])
+close
+
 fid = fopen([spath 'extremos_az.txt'],'wt');
+fprintf(fid,"max = %f ; min = %f\n\n",max(a_g),min(a_g));
 fprintf(fid,"t; a_z \n");
 for i = 1:length(idx1)
   fprintf(fid,"%f; %f \n",t(idx1(i)),px1(i));
