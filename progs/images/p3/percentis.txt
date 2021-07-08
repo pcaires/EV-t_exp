@@ -1,5 +1,5 @@
 Percentis 95 para limites ICAO
-VPE: 1.239323; HPE (elips): 1.531997; HPE (aero): 1.579904 
+VPE: 1.239323; HPE (elips): 1.629937; HPE (aero): 1.579904 
 
 Percentis 99 para limites ICAO
 VPL: 11.699650; HPL : 16.920000 

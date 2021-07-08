@@ -34,7 +34,7 @@ for i = 1:length(t_s)
   err_pos(i,:) = [NS(i,:)-REF(i,:) norm(NS(i,:)-REF(i,:))];
   
   %HPE superficie da elipsoide wgs84
-  HPE1(i) = distance(NS(i,1),NS(i,2),REF(i,1),REF(i,2));
+  HPE1(i) = norm([E_NOR(i) E_EAS(i)]);
   
   %HPE plano perpendicular altitude aeronave
   HPE2(i) = sqrt(err_pos(i,4)^2 - VPE(i)^2);
@@ -57,28 +57,28 @@ for i = 1:3
 end
 
 hf = figure();            %erro eixo horizontal Norte
-plot(t_s,err_pos(:,1),'linewidth',2)
+plot(t_s,E_NOR,'linewidth',2)
 xlabel('Tempo (s)')
 ylabel('Erro NORTE(m)')
 grid
 print(hf,[spath 'err_hor_norte' ftype])
-close
+%close
 
 hf = figure();            %erro eixo horizontal Este
-plot(t_s,err_pos(:,2),'linewidth',2)
+plot(t_s,E_EAS,'linewidth',2)
 xlabel('Tempo (s)')
 ylabel('Erro ESTE(m)')
 grid
 print(hf,[spath 'err_hor_este' ftype])
-close
+%close
 
 hf = figure();            %erro eixo vertical
-plot(t_s,VPE,'linewidth',2)
+plot(t_s,E_DOWN,'linewidth',2)
 xlabel('Tempo (s)')
 ylabel('Erro vertical (m)')
 grid
 print(hf,[spath 'err_ver' ftype])
-close
+%close
 
 hf = figure();            %Numero de satelites
 plot(t_s,D(:,3),'linewidth',2,...
@@ -89,7 +89,7 @@ ylabel('Sat. usados')
 legend('NSV\_LOCK','NSV\_USED')
 grid
 print(hf,[spath 'nsv_used' ftype])
-close
+%close
 
 pVPE95 = prctile(VPE,95);
 pHPE95_1 = prctile(HPE1,95);
