@@ -37,7 +37,7 @@ for i = 1:length(t_s)
   HPE1(i) = distance(NS(i,1),NS(i,2),REF(i,1),REF(i,2));
   
   %HPE plano perpendicular altitude aeronave
-  HPE2(i) = sqrt(err_pos(i)^2 - VPE(i)^2);
+  HPE2(i) = sqrt(err_pos(i,4)^2 - VPE(i)^2);
   
 end
 
@@ -73,12 +73,12 @@ print(hf,[spath 'err_hor_este' ftype])
 close
 
 hf = figure();            %erro eixo vertical
-plot(t_s,err_pos(:,3),'linewidth',2)
+plot(t_s,VPE,'linewidth',2)
 xlabel('Tempo (s)')
 ylabel('Erro vertical (m)')
 grid
 print(hf,[spath 'err_ver' ftype])
-close
+%close
 
 hf = figure();            %Numero de satelites
 plot(t_s,D(:,3),'linewidth',2,...
@@ -117,7 +117,7 @@ ylabel('HPE (m)')
 legend('HPE','HPE (95\%)','Lim. APV-I/II, CAT-I')
 grid
 print(hf,[spath 'HPE1' ftype])
-close
+%close
 
 hf = figure();            %HPE 2
 plot(t_s,HPE2,'linewidth',2,...
@@ -128,10 +128,19 @@ ylabel('HPE (m)')
 legend('HPE','HPE (95\%)','Lim. APV-I/II, CAT-I')
 grid
 print(hf,[spath 'HPE2' ftype])
-close
+%close
+
+hf = figure();            %HPE2 - HPE1
+plot(t_s,HPE2-HPE1,'linewidth',2)
+xlabel('Tempo (s)')
+ylabel('HPE2 - HPE1 (m)')
+grid
+print(hf,[spath 'HPE_diff' ftype])
+%close
+
 
 hf = figure();            %VPE
-plot(t_s,HPE1,'linewidth',2,...
+plot(t_s,VPE,'linewidth',2,...
      [115500 119500],[pVPE95 pVPE95],'--','linewidth',1,...
      [115500 119500],[20 20],'linewidth',1,...
      [115500 119500],[8 8],'linewidth',1,...
@@ -141,7 +150,7 @@ ylabel('VPE (m)')
 legend('VPE','VPE (95\%)','Lim. APV-I','Lim. APV-II', 'Lim. CAT-I')
 grid
 print(hf,[spath 'VPE' ftype])
-close
+%close
 
 hf = figure();            %HPL
 plot(t_s,HPL,'linewidth',2,...
