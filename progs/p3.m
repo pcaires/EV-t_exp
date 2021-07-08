@@ -23,11 +23,12 @@ el = wgs84Ellipsoid('meter');
 
 NS = [NSx NSy NSz];
 REF = [REFx REFy REFz];
+E_X = NSx - REFx
+E_Y = NSy - REFy
+VPE = NSz - REFz
 
 clear NSx,NSy,NSz,REFx,REFy,REFz
 clc
-
-VPE = NS(:,3)-REF(:,3);
 
 for i = 1:length(t_s)
   %erro posicao em m
@@ -37,7 +38,7 @@ for i = 1:length(t_s)
   HPE1(i) = norm([E_NOR(i) E_EAS(i)]);
   
   %HPE plano perpendicular altitude aeronave
-  HPE2(i) = sqrt(err_pos(i,4)^2 - VPE(i)^2);
+  HPE2(i) = norm([E_X(i) E_Y(i)]);
   
 end
 
@@ -62,7 +63,7 @@ xlabel('Tempo (s)')
 ylabel('Erro NORTE(m)')
 grid
 print(hf,[spath 'err_hor_norte' ftype])
-%close
+close
 
 hf = figure();            %erro eixo horizontal Este
 plot(t_s,E_EAS,'linewidth',2)
@@ -70,7 +71,7 @@ xlabel('Tempo (s)')
 ylabel('Erro ESTE(m)')
 grid
 print(hf,[spath 'err_hor_este' ftype])
-%close
+close
 
 hf = figure();            %erro eixo vertical
 plot(t_s,E_DOWN,'linewidth',2)
@@ -78,7 +79,7 @@ xlabel('Tempo (s)')
 ylabel('Erro vertical (m)')
 grid
 print(hf,[spath 'err_ver' ftype])
-%close
+close
 
 hf = figure();            %Numero de satelites
 plot(t_s,D(:,3),'linewidth',2,...
@@ -89,7 +90,7 @@ ylabel('Sat. usados')
 legend('NSV\_LOCK','NSV\_USED')
 grid
 print(hf,[spath 'nsv_used' ftype])
-%close
+close
 
 pVPE95 = prctile(VPE,95);
 pHPE95_1 = prctile(HPE1,95);
@@ -128,7 +129,7 @@ ylabel('HPE (m)')
 legend('HPE','HPE (95\%)','Lim. APV-I/II, CAT-I')
 grid
 print(hf,[spath 'HPE2' ftype])
-close
+%close
 
 hf = figure();            %HPE2 - HPE1
 plot(t_s,HPE2-HPE1,'linewidth',2)
@@ -136,7 +137,7 @@ xlabel('Tempo (s)')
 ylabel('HPE2 - HPE1 (m)')
 grid
 print(hf,[spath 'HPE_diff' ftype])
-close
+%close
 
 
 hf = figure();            %VPE
