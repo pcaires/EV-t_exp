@@ -3,7 +3,7 @@ clear all
 clc
 
 spath = 'images/p3/'              %Save path 
-type = '.tex'                     %File type 
+ftype = '.tex'                    %File type 
 
 D = dlmread('EV_2021.04C', ';', 1,0);
 t_s = D(:,1);               % tempo da semana (s)
@@ -51,7 +51,7 @@ for i = 1:3
   xlabel('Tempo (s)')
   ylabel([n{i} n2{i}])
   grid
-  print(hf,[spath n{i} type])
+  print(hf,[spath n{i} ftype])
   close
 
 end
@@ -61,7 +61,7 @@ plot(t_s,err_pos(:,1),'linewidth',2)
 xlabel('Tempo (s)')
 ylabel('Erro NORTE(m)')
 grid
-print(hf,[spath 'err_hor_norte' type])
+print(hf,[spath 'err_hor_norte' ftype])
 close
 
 hf = figure();            %erro eixo horizontal Este
@@ -69,7 +69,7 @@ plot(t_s,err_pos(:,2),'linewidth',2)
 xlabel('Tempo (s)')
 ylabel('Erro ESTE(m)')
 grid
-print(hf,[spath 'err_hor_este' type])
+print(hf,[spath 'err_hor_este' ftype])
 close
 
 hf = figure();            %erro eixo vertical
@@ -77,7 +77,7 @@ plot(t_s,err_pos(:,3),'linewidth',2)
 xlabel('Tempo (s)')
 ylabel('Erro vertical (m)')
 grid
-print(hf,[spath 'err_ver' type])
+print(hf,[spath 'err_ver' ftype])
 close
 
 hf = figure();            %Numero de satelites
@@ -88,7 +88,7 @@ ylim([6 13])
 ylabel('Sat. usados')
 legend('NSV\_LOCK','NSV\_USED')
 grid
-print(hf,[spath 'nsv_used' type])
+print(hf,[spath 'nsv_used' ftype])
 close
 
 pVPE95 = prctile(VPE,95);
@@ -116,7 +116,7 @@ xlabel('Tempo (s)')
 ylabel('HPE (m)')
 legend('HPE','HPE (95\%)','Lim. APV-I/II, CAT-I')
 grid
-print(hf,[spath 'HPE1' type])
+print(hf,[spath 'HPE1' ftype])
 close
 
 hf = figure();            %HPE 2
@@ -127,7 +127,7 @@ xlabel('Tempo (s)')
 ylabel('HPE (m)')
 legend('HPE','HPE (95\%)','Lim. APV-I/II, CAT-I')
 grid
-print(hf,[spath 'HPE2' type])
+print(hf,[spath 'HPE2' ftype])
 close
 
 hf = figure();            %VPE
@@ -140,7 +140,7 @@ xlabel('Tempo (s)')
 ylabel('VPE (m)')
 legend('VPE','VPE (95\%)','Lim. APV-I','Lim. APV-II', 'Lim. CAT-I')
 grid
-print(hf,[spath 'VPE' type])
+print(hf,[spath 'VPE' ftype])
 close
 
 hf = figure();            %HPL
@@ -152,7 +152,7 @@ ylabel('HPL (m)')
 legend('HPL','HPL (99\%)','Lim. HAL APV-I/II, CAT-I')
 ylim([5 42])
 grid
-print(hf,[spath 'HPL' type])
+print(hf,[spath 'HPL' ftype])
 close
 
 hf = figure();            %VPL
@@ -166,5 +166,5 @@ ylabel('VPL (m)')
 legend('VPL','VPL (99\%)','Lim. VAL APV-I','Lim. VAL APV-II', 'Lim. VAL CAT-I')
 ylim([5 52])
 grid
-print(hf,[spath 'VPL' type])
+print(hf,[spath 'VPL' ftype])
 close

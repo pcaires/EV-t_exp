@@ -3,7 +3,7 @@ clear all
 clc
 
 spath = 'images/p2/'              %Save path 
-type = '.tex'                     %File type 
+ftype = '.tex'                    %File type 
 
 
 D = dlmread('EV_2021.04B', ';', 1,0);
@@ -26,7 +26,7 @@ for i = [2:4]
   xlabel('Tempo (s)')
   ylabel(yname{i-1})
   grid
-  print(hf,[spath fn{i-1} type])
+  print(hf,[spath fn{i-1} ftype])
   close
 end
 
@@ -46,7 +46,7 @@ for i = [5:7]
       legend('Direita','Esquerda')
     end
     grid
-    print(hf,[spath fn{i-1} '_' comp{j} type])
+    print(hf,[spath fn{i-1} '_' comp{j} ftype])
     close
   end
 end
@@ -64,7 +64,7 @@ plot(t,F_tot,'linewidth',2)
 xlabel('Tempo (s)')
 ylabel('Fuel Consuption (lb)')
 grid
-print(hf,[spath 'consumo' type])
+print(hf,[spath 'consumo' ftype])
 close
 
 a_g = D(:,4)/g;
