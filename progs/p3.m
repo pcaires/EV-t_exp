@@ -78,7 +78,7 @@ xlabel('Tempo (s)')
 ylabel('Erro vertical (m)')
 grid
 print(hf,[spath 'err_ver' ftype])
-%close
+close
 
 hf = figure();            %Numero de satelites
 plot(t_s,D(:,3),'linewidth',2,...
@@ -117,7 +117,7 @@ ylabel('HPE (m)')
 legend('HPE','HPE (95\%)','Lim. APV-I/II, CAT-I')
 grid
 print(hf,[spath 'HPE1' ftype])
-%close
+close
 
 hf = figure();            %HPE 2
 plot(t_s,HPE2,'linewidth',2,...
@@ -128,7 +128,7 @@ ylabel('HPE (m)')
 legend('HPE','HPE (95\%)','Lim. APV-I/II, CAT-I')
 grid
 print(hf,[spath 'HPE2' ftype])
-%close
+close
 
 hf = figure();            %HPE2 - HPE1
 plot(t_s,HPE2-HPE1,'linewidth',2)
@@ -136,7 +136,7 @@ xlabel('Tempo (s)')
 ylabel('HPE2 - HPE1 (m)')
 grid
 print(hf,[spath 'HPE_diff' ftype])
-%close
+close
 
 
 hf = figure();            %VPE
@@ -150,7 +150,7 @@ ylabel('VPE (m)')
 legend('VPE','VPE (95\%)','Lim. APV-I','Lim. APV-II', 'Lim. CAT-I')
 grid
 print(hf,[spath 'VPE' ftype])
-%close
+close
 
 hf = figure();            %HPL
 plot(t_s,HPL,'linewidth',2,...
@@ -162,6 +162,16 @@ legend('HPL','HPL (99\%)','Lim. HAL APV-I/II, CAT-I')
 ylim([5 42])
 grid
 print(hf,[spath 'HPL' ftype])
+close
+
+hf = figure();            %HPL
+plot(t_s,HPE1,'linewidth',2,...
+     t_s,HPL,'linewidth',2)
+xlabel('Tempo (s)')
+ylabel('HPE e HPL (m)')
+legend('HPE','HPL')
+grid
+print(hf,[spath 'HPE_HPL' ftype])
 close
 
 hf = figure();            %VPL
