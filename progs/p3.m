@@ -41,6 +41,21 @@ for i = 1:length(t_s)
   
 end
 
+
+n = {'Latitude','Longitude','Altitude'}
+n2 = {' ($\degree$)',' ($\degree$)', ' (m)'}
+
+for i = 1:3
+  hf = figure();           
+  plot(t_s,D(:,4+i),'linewidth',2)
+  xlabel('Tempo (s)')
+  ylabel([n{i} n2{i}])
+  grid
+  print(hf,[spath n{i} type])
+  close
+
+end
+
 hf = figure();            %erro eixo horizontal Norte
 plot(t_s,err_pos(:,1),'linewidth',2)
 xlabel('Tempo (s)')
