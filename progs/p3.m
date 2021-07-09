@@ -54,7 +54,7 @@ end
 n = {'Latitude','Longitude','Altitude'}
 n2 = {' ($\degree$)',' ($\degree$)', ' (m)'}
 
-for i = 1:3
+for i = 1:3     %lat lon alt
   hf = figure();           
   plot(t_s,D(:,4+i),'linewidth',2)
   xlabel('Tempo (s)')
@@ -63,6 +63,13 @@ for i = 1:3
   print(hf,[spath n{i} ftype])
   close
 end
+
+hf = figure();  %Trajetória          
+plot(NS_LAT,NS_LON);
+xlabel('NS\_LAT ($\degree$)')
+ylabel('NS\_LON ($\degree$)')
+print(hf,[spath 'traj' ftype])
+%close
 
 hf = figure();            %erro eixo horizontal Norte
 plot(t_s,E_NOR,'linewidth',2)
@@ -140,6 +147,7 @@ hf = figure();            %HPE2 - HPE1
 plot(t_s,HPE2-HPE1,'linewidth',2)
 xlabel('Tempo (s)')
 ylabel('HPE2 - HPE1 (m)')
+ylim([-1e6 5e6])
 grid
 print(hf,[spath 'HPE_diff' ftype])
 close
