@@ -12,33 +12,41 @@ t_w = D(:,2);               % numero da semana
 HPL =  D(:,11);
 VPL =  D(:,12);
 
+NS_LAT = D(:,5);
+NS_LON = D(:,6);
+NS_ALT = D(:,7);
+
+REF_LAT = D(:,13);
+REF_LON = D(:,14);
+REF_ALT = D(:,15);
+
 el = wgs84Ellipsoid('meter');
 
-[NSx,NSy,NSz] = geodetic2ecef(el,D(:,5),D(:,6),D(:,7));
-[REFx,REFy,REFz] = geodetic2ecef(el,D(:,13),D(:,14),D(:,15));
+[NSx,NSy,NSz] = geodetic2ecef(el,NS_LAT,NS_LON,NS_ALT);
+
+[REFx,REFy,REFz] = geodetic2ecef(el,REF_LAT,REF_LON,REF_ALT);
+
+[E_NOR,E_EAS,E_DOWN] = geodetic2ned(NS_LAT,NS_LON,NS_ALT,...
+                                    REF_LAT,REF_LON,REF_ALT,el);
+                                    
+Ex = NSx - REFx;
+Ey = NSy - REFy;
+Ez = NSz - REFz;
 
 
-[E_NOR,E_EAS,E_DOWN] = geodetic2ned(D(:,5),D(:,6),D(:,7),...
-                                    D(:,13),D(:,14),D(:,15),el);
-
-NS = [NSx NSy NSz];
-REF = [REFx REFy REFz];
-E_X = NSx - REFx
-E_Y = NSy - REFy
-VPE = NSz - REFz
-
-clear NSx,NSy,NSz,REFx,REFy,REFz
 clc
 
+VPE = NS_ALT - REF_ALT;
+
 for i = 1:length(t_s)
-  %erro posicao em m
-  err_pos(i,:) = [NS(i,:)-REF(i,:) norm(NS(i,:)-REF(i,:))];
+  %Erro total
+  E(i) = norm([Ex(i) Ey(i) Ez(i)]);
   
   %HPE superficie da elipsoide wgs84
   HPE1(i) = norm([E_NOR(i) E_EAS(i)]);
   
   %HPE plano perpendicular altitude aeronave
-  HPE2(i) = norm([E_X(i) E_Y(i)]);
+  HPE2(i) = sqrt(E(i)^2 - VPE(i)^2);
   
 end
 
@@ -54,7 +62,6 @@ for i = 1:3
   grid
   print(hf,[spath n{i} ftype])
   close
-
 end
 
 hf = figure();            %erro eixo horizontal Norte
@@ -104,9 +111,7 @@ fprintf(fid,"Percentis 95 para limites ICAO\n");
 fprintf(fid,"VPE: %f; HPE (elips): %f; HPE (aero): %f \n\n",pVPE95,pHPE95_1,pHPE95_2);
 fprintf(fid,"Percentis 99 para limites ICAO\n");
 fprintf(fid,"VPL: %f; HPL : %f \n",pVPL99,pHPL99);
-
 fclose(fid);
-
 
 
 hf = figure();            %HPE 1
