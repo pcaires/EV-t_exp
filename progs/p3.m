@@ -120,7 +120,7 @@ plot(t_s,HPE1,'linewidth',2,...
      [115500 119500],[16 16],'linewidth',1)
 xlabel('Tempo (s)')
 ylabel('HPE (m)')
-legend('HPE','HPE (95\%)','Lim. APV-I/II, CAT-I')
+legend('HPE','HPE (95\%)','\small{Lim. APV-I/II, CAT-I}')
 grid
 print(hf,[spath 'HPE1' ftype])
 close
@@ -131,10 +131,10 @@ plot(t_s,HPE2,'linewidth',2,...
      [115500 119500],[16 16],'linewidth',1)
 xlabel('Tempo (s)')
 ylabel('HPE (m)')
-legend('HPE','HPE (95\%)','Lim. APV-I/II, CAT-I')
+legend('HPE','HPE (95\%)','\small{Lim. APV-I/II, CAT-I}')
 grid
 print(hf,[spath 'HPE2' ftype])
-%close
+close
 
 hf = figure();            %HPE2 - HPE1
 plot(t_s,HPE2-HPE1,'linewidth',2)
@@ -142,7 +142,7 @@ xlabel('Tempo (s)')
 ylabel('HPE2 - HPE1 (m)')
 grid
 print(hf,[spath 'HPE_diff' ftype])
-%close
+close
 
 
 hf = figure();            %VPE
@@ -153,7 +153,8 @@ plot(t_s,VPE,'linewidth',2,...
      [115500 119500],[5 5],'linewidth',1)
 xlabel('Tempo (s)')
 ylabel('VPE (m)')
-legend('VPE','VPE (95\%)','Lim. APV-I','Lim. APV-II', 'Lim. CAT-I')
+ylim([-5 22])
+legend('VPE','VPE (95\%)','Lim. APV-I','Lim. APV-II', '\small{Lim. CAT-I}')
 grid
 print(hf,[spath 'VPE' ftype])
 close
@@ -164,15 +165,20 @@ plot(t_s,HPL,'linewidth',2,...
      [115500 119500],[40 40],'linewidth',1)
 xlabel('Tempo (s)')
 ylabel('HPL (m)')
-legend('HPL','HPL (99\%)','Lim. HAL APV-I/II, CAT-I')
+legend('HPL','HPL (99\%)','\small{Lim. HAL APV-I/II, CAT-I}')
 ylim([5 42])
 grid
 print(hf,[spath 'HPL' ftype])
 close
 
-hf = figure();            %HPL
+hf = figure();            %HPE e HPL
 plot(t_s,HPE1,'linewidth',2,...
      t_s,HPL,'linewidth',2)
+     
+[m,i] = max(HPE1);
+text(t_s(i)+100,m-1,['max(HPE) = ' num2str(m) 'm']);
+text(t_s(i)+100,HPL(i)+2,['RX\_TOM = ' num2str(t_s(i)) 's ;HPL = ' num2str(HPL(i)) 'm']);
+
 xlabel('Tempo (s)')
 ylabel('HPE e HPL (m)')
 legend('HPE','HPL')
@@ -188,7 +194,7 @@ plot(t_s,VPL,'linewidth',2,...
      [115500 119500],[12 12],'linewidth',1)
 xlabel('Tempo (s)')
 ylabel('VPL (m)')
-legend('VPL','VPL (99\%)','Lim. VAL APV-I','Lim. VAL APV-II', 'Lim. VAL CAT-I')
+legend('VPL','VPL (99\%)','Lim. VAL APV-I','Lim. VAL APV-II', '\small{Lim. VAL CAT-I}')
 ylim([5 52])
 grid
 print(hf,[spath 'VPL' ftype])
