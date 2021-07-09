@@ -64,12 +64,12 @@ for i = 1:3     %lat lon alt
   close
 end
 
-hf = figure();  %Trajetória          
+hf = figure();  %Trajetoria          
 plot(NS_LAT,NS_LON);
 xlabel('NS\_LAT ($\degree$)')
 ylabel('NS\_LON ($\degree$)')
 print(hf,[spath 'traj' ftype])
-%close
+close
 
 hf = figure();            %erro eixo horizontal Norte
 plot(t_s,E_NOR,'linewidth',2)
@@ -147,7 +147,7 @@ hf = figure();            %HPE2 - HPE1
 plot(t_s,HPE2-HPE1,'linewidth',2)
 xlabel('Tempo (s)')
 ylabel('HPE2 - HPE1 (m)')
-ylim([-1e6 5e6])
+ylim([-1e-6 5e-6])
 grid
 print(hf,[spath 'HPE_diff' ftype])
 close
@@ -206,4 +206,16 @@ legend('VPL','VPL (99\%)','Lim. VAL APV-I','Lim. VAL APV-II', '\small{Lim. VAL C
 ylim([5 52])
 grid
 print(hf,[spath 'VPL' ftype])
+close
+
+
+hf = figure();            %VPE e VPL
+plot(t_s,VPE,'linewidth',2,...
+     t_s,VPL,'linewidth',2)
+
+xlabel('Tempo (s)')
+ylabel('VPE e VPL (m)')
+legend('VPE','VPL')
+grid
+print(hf,[spath 'VPE_VPL' ftype])
 close
