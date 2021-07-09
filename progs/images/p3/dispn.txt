@@ -1,0 +1,4 @@
+Disponibilidade
+ APV-I: 100%
+ APV-II: 100%
+CAT_I: 99.710907 %

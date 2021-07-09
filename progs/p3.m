@@ -7,7 +7,7 @@ ftype = '.tex'                    %File type
 
 D = dlmread('EV_2021.04C', ';', 1,0);
 t_s = D(:,1);               % tempo da semana (s)
-t_w = D(:,2);               % numero da semana
+%t_w = D(:,2);              % numero da semana
 
 HPL =  D(:,11);
 VPL =  D(:,12);
@@ -64,12 +64,14 @@ for i = 1:3     %lat lon alt
   close
 end
 
-hf = figure();  %Trajetoria          
-plot(NS_LAT,NS_LON);
-xlabel('NS\_LAT ($\degree$)')
-ylabel('NS\_LON ($\degree$)')
-print(hf,[spath 'traj' ftype])
+hf = figure();  %PE       
+plot(t_s,E);
+xlabel('Tempo (s)')
+ylabel('Erro de Pos. (m)')
+grid
+print(hf,[spath 'erro' ftype]);
 close
+
 
 hf = figure();            %erro eixo horizontal Norte
 plot(t_s,E_NOR,'linewidth',2)
