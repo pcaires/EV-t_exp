@@ -1,8 +1,8 @@
 Numero de ciclos para pares de N1 e N2
 
-N1:2.0; N2:1.8; ciclos:63
-N1:3.5; N2:3.3; ciclos:51
-N1:5.0; N2:4.8; ciclos:16
+N1:2.0; N2:1.8; ciclos:142
+N1:3.5; N2:3.3; ciclos:90
+N1:5.0; N2:4.8; ciclos:20
 N1:6.0; N2:5.8; ciclos:0
 N1:7.0; N2:6.8; ciclos:0
 N1:0.0; N2:0.2; ciclos:8

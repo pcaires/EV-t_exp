@@ -68,15 +68,16 @@ print(hf,[spath 'consumo' ftype])
 close
 
 a_g = D(:,4)/g;
-[px1 idx1] = findpeaks(a_g,'DoubleSided');
+[px1 idx1] = findpeaks2(a_g);
 
 hf = figure();
-plot(t,a_g,'linewidth',2)
+plot(t,a_g,'linewidth',2,...
+     t(idx1),px1,'ro','MarkerSize',7)
 xlabel('Tempo (s)')
 ylabel('Accel. $a_z$ (g)')
 grid
-print(hf,[spath 'a_z_g' ftype])
-close
+%print(hf,[spath 'a_z_g' ftype])
+%close
 
 fid = fopen([spath 'extremos_az.txt'],'wt');
 fprintf(fid,"max = %f ; min = %f\n\n",max(a_g),min(a_g));
