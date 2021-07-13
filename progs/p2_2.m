@@ -18,17 +18,21 @@ for j = 1:length(N(1,:))
   N1 = N(1,j);
   N2 = N(2,j);
   c(j) = 0;
+  inv = N2>N1;
   for i = 1:length(t)
-    if abs(a_z(i)-1) > abs(N1-1) && !init   # iniciar contagem
+    b1 = a_z(i) > N1;
+    if xor(inv,b1) && !init   # iniciar contagem
       init = 1;
     end
-    if init && abs(a_z(i)-1) < abs(N1-1)    # incrementar contagem
-      init = 0;
-      c(j) = c(j) + 1;
+    if init # incrementar contagem
+      b2 = a_z(i) < N2;
+      if xor(inv,b2)
+        init = 0;
+        c(j) = c(j) + 1;
+      end
     end
   end
 end
-
 
 fid = fopen("images/p2/ciclos_az.txt","wt");
 fprintf(fid,"Numero de ciclos para pares de N1 e N2\n\n");
